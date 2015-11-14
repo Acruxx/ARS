@@ -1,6 +1,7 @@
 import sys, pygame
 from Vec2 import *
 import math
+import pdb
 
 CAR_SCALE = 0.3;
 
@@ -25,10 +26,9 @@ class Car:
         #changing size
         self.imgTemplate = pygame.transform.scale(self.imgTemplate, (int(self.size.x), int(self.size.y)))
 
-    def update(self):
 
+    def update(self):
         self.img = self.imgTemplate;
-        self.ang += 0.02
 
         #self.img = pygame.transform.position(img, pos.getTuple())
         self.img = pygame.transform.rotate(self.img, -(self.ang / math.pi * 180 - 90))
