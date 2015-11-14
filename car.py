@@ -3,11 +3,8 @@ from Vec2 import *
 import math
 import pdb
 
-CAR_SCALE = 0.3;
+from Globals import *
 
-BOARD_SIZE = 720
-
-MOVE_SPEED = 3
 
 class Car:
     def __init__(self, ang, rad):
@@ -16,7 +13,7 @@ class Car:
 
         self.img = None
 
-        self.imgTemplate = pygame.image.load("media/car.png")
+        self.loadImage()
         self.box = self.imgTemplate.get_rect()
 
         self.pos = Vec2(0,0)
@@ -26,8 +23,14 @@ class Car:
         #changing size
         self.imgTemplate = pygame.transform.scale(self.imgTemplate, (int(self.size.x), int(self.size.y)))
 
+    def loadImage(self):
+        self.imgTemplate = pygame.image.load("media/car.png")
+
 
     def update(self):
+        self.updateGraphics()
+
+    def updateGraphics(self):
         self.img = self.imgTemplate;
 
         #self.img = pygame.transform.position(img, pos.getTuple())
@@ -43,6 +46,12 @@ class Car:
         screen.blit(self.img, (self.pos.x, self.pos.y), self.box)
         #screen.blit(self.img, (0, 0), self.box)
         
+    def checkCollision(self, player):
+        if getDistance(self.pos, player.pos) < self.size.x / 3:
+            return True
+        return False
+
+
     
     def getAng(self):
         return self.ang
@@ -55,3 +64,4 @@ class Car:
     
     def setRad(self, rad):
         self.rad = rad;
+
