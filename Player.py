@@ -32,6 +32,10 @@ class Player(Car):
         if inputManager.decelerate == True:
             if not self.speed < 0.25:
                 self.speed -= ACCELERATION
+                
+                self.breaking = True
+        else:
+            self.breaking = False
 
         #Calculating the angle change based on the radius
         angleChange = ANGULAR_SPEED / self.rad * self.speed
@@ -43,8 +47,6 @@ class Player(Car):
 
     def addScore(self):
         self.score += 1000
-        
-        #print("Current score: ", self.score)
 
     def resetCar(self):
         self.ang = 0

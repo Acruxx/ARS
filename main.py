@@ -3,6 +3,7 @@ from InputManager import *
 from car import *
 from Player import *
 from GhostTrack import *
+from GhostCar import *
 from Coin import *
 import random
 import time
@@ -57,7 +58,7 @@ class Game:
         self.oldOffsets.append(self.currentOffset)
     
         #Restart the game and spawn some stuff
-        self.oldCars.append(Car(0, 200))
+        self.oldCars.append(GhostCar())
     
         for track in self.oldTracks:
             track.reset_count()
