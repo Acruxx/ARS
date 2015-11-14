@@ -16,6 +16,15 @@ class GhostCar(Car):
         else:
             self.breaking = False
 
+        if self.future != None:
+            if self.future[1] > self.rad + 10:
+                self.turning = 1
+            elif self.future[1] < self.rad - 10:
+                self.turning = -1
+            else:
+                self.turning = 0
+
     def setFuture(self, future):
         if future != None:
-            self.future = future;updateGraphics
+            self.future = future;
+

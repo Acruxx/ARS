@@ -17,6 +17,11 @@ class GhostTrack:
     def reset_count(self):
         self.current_pos = 0;
 
+    def get_future_pos(self, futureAmount):
+        if self.list_size > self.current_pos + futureAmount:
+            return self.pos_list[self.current_pos + futureAmount]
+        return None
+
 
 if __name__ == '__main__':
     h = GostTrack()

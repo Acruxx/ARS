@@ -17,6 +17,8 @@ class Car:
         self.loadImage()
 
         self.breakImgTemplate = pygame.image.load("media/breakLights.png")
+        self.turnLeftImgTemplate = pygame.image.load("media/turnLeft.png")
+        self.turnRightImgTemplate = pygame.image.load("media/turnRight.png")
 
         self.box = self.imgTemplate.get_rect()
 
@@ -33,19 +35,33 @@ class Car:
         #changing size
         self.imgTemplate = pygame.transform.scale(self.imgTemplate, (int(self.size.x), int(self.size.y)))
         self.breakImgTemplate = pygame.transform.scale(self.breakImgTemplate, (int(self.size.x), int(self.size.y)))
+        self.turnRightImgTemplate = pygame.transform.scale(self.turnRightImgTemplate, (int(self.size.x), int(self.size.y)))
+        self.turnLeftImgTemplate = pygame.transform.scale(self.turnLeftImgTemplate, (int(self.size.x), int(self.size.y)))
 
         self.breaking = False
+        self.turning = 0
 
     def loadImage(self):
         self.imgTemplate = pygame.image.load("media/car.png")
 
+    
+    def onMaxRadius(self):
+        pass
+    def onMinRadius(self):
+        pass
+
 
     def update(self):
+        if(self.rad > MAX_RAD + MIN_RAD):
+            self.rad = MAX_RAD + MIN_RAD
+            self.onMaxRadius()
+        elif(self.rad < MIN_RAD):
+            self.rad = MIN_RAD
+            self.onMinRadius()
+
         self.updateGraphics()
 
     def updateGraphics(self):
-        self.img = self.imgTemplate;
-        self.breakImg = self.breakImgTemplate
 
         self.currAngle = -(self.ang + math.pi / 2)
         self.calculateOffsetAngle()
@@ -53,8 +69,10 @@ class Car:
         #self.offsetAngle = math.pi / 3
 
         #self.img = pygame.transform.position(img, pos.getTuple())
-        self.img = pygame.transform.rotate(self.img, (self.offsetAngle + math.pi) / math.pi * 180)
-        self.breakImg = pygame.transform.rotate(self.breakImg, (self.offsetAngle + math.pi) / math.pi * 180)
+        self.img = self.rotateImage(self.imgTemplate)
+        self.breakImg = self.rotateImage(self.breakImgTemplate)
+        self.turnRightImg = self.rotateImage(self.turnRightImgTemplate)
+        self.turnLeftImg = self.rotateImage(self.turnLeftImgTemplate)
 
         self.oldTruePos = self.truePos
         self.truePos = Vec2(
@@ -76,6 +94,11 @@ class Car:
         if self.breaking:
             screen.blit(self.breakImg, (self.pos.x, self.pos.y), self.box)
 
+        if self.turning == -1:
+            screen.blit(self.turnRightImg, (self.pos.x, self.pos.y), self.box)
+        elif self.turning == 1:
+            screen.blit(self.turnLeftImg, (self.pos.x, self.pos.y), self.box)
+
         
     def checkCollision(self, player):
         if getDistance(self.pos, player.pos) < self.size.x / 3:
@@ -94,7 +117,8 @@ class Car:
 
         #print self.pos, self.oldPos, velVector
 
-
+    def rotateImage(self, image):
+        return pygame.transform.rotate(image, (self.offsetAngle + math.pi) / math.pi * 180)
     
     def getAng(self):
         return self.ang
@@ -107,4 +131,5 @@ class Car:
     
     def setRad(self, rad):
         self.rad = rad;
+
 

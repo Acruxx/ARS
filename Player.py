@@ -54,3 +54,9 @@ class Player(Car):
         self.turnVel = 0
         self.speed = 0.5
 
+    def onMinRadius(self):
+        self.turnVel = 0
+    
+    def onMaxRadius(self):
+        self.turnVel = 0
+

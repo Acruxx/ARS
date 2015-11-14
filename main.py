@@ -109,6 +109,7 @@ class Game:
                     self.oldCars[i].setAng(oldPos[0])
                     self.oldCars[i].setRad(oldPos[1] + self.oldOffsets[i])
                     self.oldCars[i].update()
+                    self.oldCars[i].setFuture(self.oldTracks[i].get_future_pos(60))
 
                     if self.oldCars[i].checkCollision(self.player):
                         print "You died, final score: {}".format(self.player.score)
