@@ -25,11 +25,7 @@ class Car:
         #changing size
         self.imgTemplate = pygame.transform.scale(self.imgTemplate, (int(self.size.x), int(self.size.y)))
 
-    def update(self, inputManager):
-        if(inputManager.moveLeft):
-            self.rad += MOVE_SPEED
-        if(inputManager.moveRight):
-            self.rad -= MOVE_SPEED
+    def update(self):
 
         self.img = self.imgTemplate;
         self.ang += 0.02
@@ -47,5 +43,15 @@ class Car:
         screen.blit(self.img, (self.pos.x, self.pos.y), self.box)
         #screen.blit(self.img, (0, 0), self.box)
         
+    
+    def getAng(self):
+        return self.ang
 
+    def setAng(self, ang):
+        self.ang = ang;
 
+    def getRad(self):
+        return self.rad
+    
+    def setRad(self, rad):
+        self.rad = rad;

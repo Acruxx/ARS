@@ -1,4 +1,4 @@
-class GostTrack:
+class GhostTrack:
 
     def __init__(self):
         self.list_size = 0

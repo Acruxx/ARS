@@ -1,6 +1,8 @@
 import sys, pygame
 from InputManager import *
 from car import *
+from Player import *
+from GhostTrack import *
 
 pygame.init()
 
@@ -20,7 +22,11 @@ roundaboutImage = pygame.transform.scale(roundaboutImage, (BOARD_SIZE,BOARD_SIZE
 
 inputManager = InputManager()
 
-car = Car(0, 200);
+player = Player(0, 200);
+
+currentTrack = GhostTrack();
+
+doneLaps = 0
 
 while 1:
     for event in pygame.event.get():
@@ -28,9 +34,14 @@ while 1:
         
         inputManager.onEvent(event);
 
-    car.update(inputManager);
+    player.update(inputManager);
+
+    if(player.getAng() > math.pi * 2):
+        doneLaps += 1
+        player.setAng(player.getAng() - math.pi * 2)
+
 
     screen.fill(black)
     screen.blit(roundaboutImage, roundaboutRect)
-    car.draw(screen);
+    player.draw(screen);
     pygame.display.flip()
