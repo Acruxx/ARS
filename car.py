@@ -42,7 +42,7 @@ class Car:
         self.turning = 0
 
     def loadImage(self):
-        self.imgTemplate = pygame.image.load("media/car.png")
+        self.imgTemplate = pygame.image.load("media/car2.png")
 
     
     def onMaxRadius(self):

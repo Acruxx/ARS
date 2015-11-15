@@ -10,6 +10,9 @@ BOARD_SIZE = 720
 MIN_RAD = 200
 MAX_RAD = 130
 
+MAX_SHAKE_RAD = 120
+MIN_SHAKE_RAD = 202
+
 screenshaker = Screenshaker()
 
 def getRandomRadius():

@@ -15,6 +15,10 @@ class Player(Car):
         
         self.score = 0
 
+        self.shakeSound = pygame.mixer.Sound("media/Screenshake.ogg")
+        self.shakeSound.set_volume(0.3)
+        self.shaking = False
+
     def update(self, inputManager):
         if(inputManager.moveLeft):
             self.turnVel += RADIAL_ACCELERATION
@@ -22,6 +26,16 @@ class Player(Car):
             self.turnVel -= RADIAL_ACCELERATION
         else:
             self.turnVel -= self.turnVel * 0.05
+
+        if(self.rad < MIN_SHAKE_RAD or self.rad > MIN_RAD + MAX_SHAKE_RAD):
+            screenshaker.shake()
+
+            if self.shaking == False:
+                self.shakeSound.play(-1)
+                self.shaking = True
+        else:
+            self.shakeSound.stop()
+            self.shaking = False
         
         self.rad += self.turnVel
 
@@ -57,9 +71,7 @@ class Player(Car):
 
     def onMinRadius(self):
         self.turnVel = 0
-        screenshaker.shake()
     
     def onMaxRadius(self):
         self.turnVel = 0
-        screenshaker.shake()
 

@@ -17,9 +17,9 @@ class GhostCar(Car):
             self.breaking = False
 
         if self.future != None:
-            if self.future[1] > self.rad + 10:
+            if self.future[1] > self.rad + 30:
                 self.turning = 1
-            elif self.future[1] < self.rad - 10:
+            elif self.future[1] < self.rad - 30:
                 self.turning = -1
             else:
                 self.turning = 0
