@@ -2,6 +2,7 @@ import sys, pygame
 from Vec2 import *
 import math
 import pdb
+import time
 
 from Globals import *
 
@@ -95,10 +96,11 @@ class Car:
         if self.breaking:
             screen.blit(self.breakImg, (self.pos.x, self.pos.y), self.box)
 
-        if self.turning == -1:
-            screen.blit(self.turnRightImg, (self.pos.x, self.pos.y), self.box)
-        elif self.turning == 1:
-            screen.blit(self.turnLeftImg, (self.pos.x, self.pos.y), self.box)
+        if(round(time.time() * 6) % 2 == 1):
+            if self.turning == -1:
+                screen.blit(self.turnRightImg, (self.pos.x, self.pos.y), self.box)
+            elif self.turning == 1:
+                screen.blit(self.turnLeftImg, (self.pos.x, self.pos.y), self.box)
 
         
     def checkCollision(self, player):
