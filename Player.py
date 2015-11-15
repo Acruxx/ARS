@@ -25,6 +25,7 @@ class Player(Car):
         
         self.rad += self.turnVel
 
+
         if(inputManager.accelerate == True):
             if not self.speed > 1:
                 self.speed += ACCELERATION
@@ -56,7 +57,9 @@ class Player(Car):
 
     def onMinRadius(self):
         self.turnVel = 0
+        screenshaker.shake()
     
     def onMaxRadius(self):
         self.turnVel = 0
+        screenshaker.shake()
 

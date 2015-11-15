@@ -88,7 +88,8 @@ class Car:
 
 
     def draw(self, screen):
-        screen.blit(self.img, (self.pos.x, self.pos.y), self.box)
+        screen.blit(self.img, (self.pos.x + screenshaker.offset.x, self.pos.y + screenshaker.offset.y), self.box)
+
         #screen.blit(self.img, (0, 0), self.box)
 
         if self.breaking:
@@ -105,6 +106,8 @@ class Car:
             return True
         return False
 
+
+
     def calculateOffsetAngle(self):
         self.oldVel = self.velVector
 
@@ -115,7 +118,7 @@ class Car:
 
         self.offsetAngle = -velAngle
 
-        #print self.pos, self.oldPos, velVector
+
 
     def rotateImage(self, image):
         return pygame.transform.rotate(image, (self.offsetAngle + math.pi) / math.pi * 180)

@@ -36,7 +36,7 @@ class Coin:
                 )
 
     def draw(self, screen):
-        screen.blit(self.img, (self.pos.x, self.pos.y), self.box)
+        screen.blit(self.img, (self.pos + screenshaker.offset).getTuple(), self.box)
         #screen.blit(self.img, (0, 0), self.box)
 
     def reposition(self):

@@ -112,7 +112,18 @@ class Game:
                     self.oldCars[i].setFuture(self.oldTracks[i].get_future_pos(60))
 
                     if self.oldCars[i].checkCollision(self.player):
-                        print "You died, final score: {}".format(self.player.score)
+                        score = self.player.score
+
+                        print "You died, final score: {}".format(score)
+
+                        if(score >= highScore.getLowest()):
+                            name = raw_input("New high score, what's your name?")
+
+                            highScore.addScore(name, score)
+
+                        highScore.printScore()
+                        highScore.save()
+
                         sys.exit(0)
 
                 self.coin.update(self.player)
@@ -128,7 +139,8 @@ class Game:
                 self.coin.updateGraphics()
 
         
-            self.screen.blit(self.roundaboutImage, self.roundaboutRect)
+            #self.screen.blit(self.roundaboutImage, screenshaker.offset.getTuple(), self.roundaboutRect)
+            self.screen.blit(self.roundaboutImage, screenshaker.offset.getTuple(), self.roundaboutRect)
             self.player.draw(self.screen);
 
             for car in self.oldCars:
